@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="da">
+<head>
+    <meta charset="utf-8">
+    <script src="/node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js"></script>
+    <script src="/node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script type="module" src="kb-input.js"></script>
+    <script type="module" src="kb-button.js"></script>
+    <script type="module" src="kb-stack.js"></script>
+    <script type="module" src="kb-footer.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body>
+
+<form action="https://www.kb.dk/" method="POST" role="search">
+    <kb-stack shadow>
+        <kb-input expand name="input" type="search" id="mainSearchInput" class="form-control" placeholder="Søg på titel, forfatter, tidsskrift, database etc." name=""></kb-input>
+        <kb-button type="submit" text="søg"></kb-button>
+    </kb-stack>
+</form>
+
+<kb-footer></kb-footer>
+</body>
+</html>
