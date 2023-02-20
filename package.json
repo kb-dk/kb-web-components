@@ -1,9 +1,24 @@
 {
-  "name": "test_kbdk_design",
+  "name": "@test_kbdk/kb-footer",
   "version": "0.0.0",
-  "private": true,
   "dependencies": {
     "lit-element": "2.1.0",
     "@webcomponents/webcomponentsjs": "2.2.10"
-  }
+  },
+  "description": "A footer with kb design and links.",
+  "main": "kb-footer.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kb-dk/kb-web-components.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kb-dk/kb-web-components/issues"
+  },
+  "homepage": "https://github.com/kb-dk/kb-web-components#readme"
 }
