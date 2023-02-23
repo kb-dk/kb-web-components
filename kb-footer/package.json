@@ -1,6 +1,6 @@
 {
   "name": "@test_kbdk/kb-footer",
-  "version": "0.3.0",
+  "version": "1.1.0",
   "description": "A footer with kb design and links.",
   "engines": {
     "node": "^19.6.1"
