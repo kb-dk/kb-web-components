@@ -1,0 +1,25 @@
+{
+  "name": "@test_kbdk/kb-fonts",
+  "version": "1.0.0",
+  "description": "KB font an icon files and css.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kb-dk/kb-web-components.git"
+  },
+  "keywords": [
+    "kb",
+    "fonts",
+    "and",
+    "icons"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kb-dk/kb-web-components/issues"
+  },
+  "homepage": "https://github.com/kb-dk/kb-web-components#readme"
+}

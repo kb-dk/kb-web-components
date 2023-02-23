@@ -1,6 +1,6 @@
 {
   "name": "@test_kbdk/kb-footer",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A footer with kb design and links.",
   "engines": {
     "node": "^19.6.1"
@@ -13,7 +13,8 @@
     "@lit/reactive-element": "^1.6.1",
     "lit": "^2.6.1",
     "lit-element": "^3.2.2",
-    "lit-html": "^2.6.1"
+    "lit-html": "^2.6.1",
+    "@test_kbdk/kb-fonts": "/home/zahra/Desktop/projects/kb-web-components/kb-fonts/dist/index.js"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^11.0.0",

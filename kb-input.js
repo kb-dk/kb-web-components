@@ -1,7 +1,7 @@
 import {html, css, LitElement} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js';
 
 export class KBInput extends LitElement {
-  static formAssociated = true;
+  static formAssociated = false;
 
   static properties = {
     type: {type: String, reflect: true},
