@@ -1,0 +1,23 @@
+{
+  "name": "@kb-dk/kb-icon",
+  "version": "1.0.0",
+  "description": "KB icon web component.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kb-dk/kb-web-components.git"
+  },
+  "keywords": [
+    "kb",
+    "icons"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kb-dk/kb-web-components/issues"
+  },
+  "homepage": "https://github.com/kb-dk/kb-web-components#readme"
+}

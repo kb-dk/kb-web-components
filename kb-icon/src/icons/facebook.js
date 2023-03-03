@@ -1,0 +1,3 @@
+export default '<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><path transform="scale(1, -1) translate(0, -1000)" d="M585.142 631.754v83.182c0 40.156 25.815 48.761 45.894 48.761s114.735 0 114.735 0v174.97h-157.76c-174.97 0-215.126-131.945-215.126-215.126v-91.787h-100.392v-203.651h103.261c0-232.337 0-513.434 0-513.434h203.651c0 0 0 283.967 0 513.434h152.022l20.079 203.651h-166.365z"/></g></svg>'
+export const title = "facebook"
+export const tags = "KB Facebook icon"
