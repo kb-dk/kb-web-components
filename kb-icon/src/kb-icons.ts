@@ -7,7 +7,7 @@ export class KbIcon extends LitElement {
 
     @property() name = '';
     @property() color = '#002e70';
-    @property() size = 'xs';
+    @property() size = 'xxs';
 
     render() {
         if (this.name.length) {
@@ -36,6 +36,8 @@ export class KbIcon extends LitElement {
 
     private getSize = (): string => {
         switch (this.size) {
+            case 'xxs':
+                return "14px";
             case 'xs':
                 return "18px";
             case 's':
@@ -49,7 +51,7 @@ export class KbIcon extends LitElement {
             case 'xxl':
                 return "72px";
             default:
-                return "18px";
+                return "14px";
         }
     }
 }
