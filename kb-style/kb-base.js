@@ -1,0 +1,40 @@
+import{css}from"lit";
+export const KBColors=css`
+  :host {
+      --kb-color-dark-blue-100: #002e70;
+      --kb-color-dark-blue-05: #F2F4F8;
+      --kb-color-almost-black-100: #171717;
+      --kb-color-almost-black-50: #757575;
+      --kb-color-almost-black-05: #F5F5F5;
+      --kb-color-dark-gray: #323232;
+      --kb-color-light-gray: #D6D6D6;
+      --kb-color-red-100: #B30018;
+      --kb-color-pink-100: #F391B8;
+      --kb-color-pink-50: #F9C8DC;
+      --kb-color-pink-15: #FEEFF5;
+      --kb-color-orange: #F4B664;
+      --kb-color-yellow-100: #FEEC89;
+      --kb-color-yellow-50: #FFF6C4;
+      --kb-color-yellow-15: #FFFDEE;
+      --kb-color-sky-blue-100: #96E2FD;
+      --kb-color-sky-blue-50: #CAF0FE;
+      --kb-color-sky-blue-15: #F0FBFF;
+      --kb-color-green-100: #26D466;
+      --kb-color-teal-100: #8AE3DB;
+      --kb-color-teal-50: #C4F1ED;
+      --kb-color-teal-15: #EEFBFA;
+      --kb-color-black-100: #000;
+      --kb-color-white-100: #FFF;
+      --kb-color-primary: var(--kb-color-dark-blue-100);
+      --kb-color-body: var(--kb-color-almost-black-100);
+      --kb-color-danger: var(--kb-color-red-100);
+      --kb-color-warning: var(--kb-color-orange);
+      --kb-color-secondary: var(--kb-color-sky-blue-100);
+      --kb-color-success: var(--kb-color-green-100);
+      --kb-color-event-cenceled: var(--kb-color-red-100);
+      --kb-color-event-sold-out: var(--kb-color-orange);
+      --kb-color-event-postponed: var(--kb-color-yellow-100);
+      --kb-color-event-not-yet-for-sale: var(--kb-color-green-100);
+      --kb-color-event-new-date: var(--kb-color-teal-50);
+    }
+`;
