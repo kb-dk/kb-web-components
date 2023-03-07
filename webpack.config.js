@@ -1,72 +1,19 @@
-const path = require("path");
+//Require webpack specific tools
+const { merge } = require('webpack-merge')
 const HTMLWebpackPlugin = require("html-webpack-plugin");
-const TerserPlugin = require("terser-webpack-plugin");
-const dev = {
-    mode: "development",
-    devtool: "source-map",
-    entry: "./main",
-    name: "dev",
-    output: {
-        path: path.join(__dirname, "dist/"),
-        filename: "js/main.js",
-        clean: true
-    },
-    resolve: {
-        extensions: [".ts", ".js"]
-    },
-    devServer: {
-        static: "./dist",
-        historyApiFallback: true,
-        proxy: {
-            "/jsonapi": {
-                target: "https://kbdk-testing.kb.dk",
-                changeOrigin: true,
-            }
-        }
-    },
-    plugins: [
-        new HTMLWebpackPlugin({
-            template: "./index.html"
-        }),
-    ],
-    module: {
-        rules: [{
-            test: /\.ts$/,
-            exclude: "/node_modules/",
-            use: "ts-loader",
-        },
-            {
-            test: /\.html$/,
-            exclude: "/node_modules/",
-            use: "html-loader"
-        },
-            {
-            test: /\.(jpg|png|gif|jpeg|svg)$/i,
-            type: "asset",
-            parser: {
-              dataUrlCondition: {
-                  maxSize: 20 * 1024, // images under 20kb get inline and the ones over that get copied
-              }
-            },
-            generator: {
-                filename: "img/[name][hash][ext]" // Cache busting with hash
-            }
-        }]
-    }
-}
+const path = require("path");
 
-const prod = {
-    ...dev,
-    name:'prod',
-    mode: 'production',
-    optimization: {
-        minimize: true,
-        minimizer: [
-            new TerserPlugin({
-                extractComments: 'all'
-            })
-        ]
-    }
-}
+//Require base conf
+const common = require("./webpack/webpack.common");
 
-module.exports = [dev, prod];
+//Setup server environment definitions and get current environment
+const envs = { development: "dev", production: "prod" };
+const env = envs[process.env.NODE_ENV || "development"];
+
+//Require conf that matches server environment
+const envConfig = require(`./webpack/webpack.${env}.js`);
+
+//Require webcomponent specific entry and index.html path
+const globalPathConfig = require(`./webpack/webpack.global-paths`);
+
+module.exports = merge(common, envConfig, globalPathConfig)
