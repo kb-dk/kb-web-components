@@ -1,6 +1,6 @@
 {
   "name": "@kb-dk/kb-style",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "KB new component.",
   "main": "index.js",
   "scripts": {
