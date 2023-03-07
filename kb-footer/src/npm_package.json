@@ -10,6 +10,9 @@
     "type": "git",
     "url": "git+https://github.com/kb-dk/kb-web-components.git"
   },
+  "dependencies": {
+    "bootstrap": "^5.2.3"
+  },
   "keywords": [
     "kb",
     "footer"

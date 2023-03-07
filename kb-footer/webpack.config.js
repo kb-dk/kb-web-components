@@ -67,6 +67,11 @@ const dev = {
                 }
             },
             {
+                test: /\.scss$/,
+                exclude: "/node_modules/",
+                use: [ "css-loader", "sass-loader"]
+            },
+            {
                 test: /\.html$/,
                 exclude: "/node_modules/",
                 use: "html-loader"
