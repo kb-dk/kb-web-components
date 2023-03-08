@@ -1,6 +1,7 @@
 const path = require("path");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const dev = {
     mode: "development",
     devtool: "source-map",
@@ -19,7 +20,7 @@ const dev = {
         historyApiFallback: true,
         proxy: {
             "/jsonapi": {
-                target: "https://kbdk-testing.kb.dk",
+                target: "https://www.kb.dk",
                 changeOrigin: true,
             }
         }
@@ -28,9 +29,20 @@ const dev = {
         new HTMLWebpackPlugin({
             template: "./index.html"
         }),
+        new MiniCssExtractPlugin({filename: "css/style.css"}),
     ],
     module: {
         rules: [{
+            test: /\.css$/i,
+            use: [MiniCssExtractPlugin.loader, "css-loader"],
+        },             {
+            test: /\.(ttf|woff2|eot|woff)$/i,
+            type: "asset/resource",
+            generator: {
+                filename: "fonts/[name][hash][ext]"
+            }
+        },
+            {
             test: /\.ts$/,
             exclude: "/node_modules/",
             use: "ts-loader",
@@ -49,7 +61,7 @@ const dev = {
               }
             },
             generator: {
-                filename: "img/[name][hash][ext]" // Cache busting with hash
+                filename: "img/[name][ext]" // Cache busting with hash
             }
         }]
     }
