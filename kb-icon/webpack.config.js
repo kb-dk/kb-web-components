@@ -1,59 +1,20 @@
-const path = require("path");
-const TerserPlugin = require("terser-webpack-plugin");
-const CopyPlugin = require("copy-webpack-plugin");
-const dev = {
-    mode: "development",
-    devtool: "source-map",
-    entry: "./src/main",
-    name: "dev",
-    output: {
-        path: path.join(__dirname, "dist/"),
-        filename: "index.js",
-        clean: true
-    },
-    resolve: {
-        extensions: [".ts", ".js"]
-    },
-    devServer: {
-        static: "./dist",
-        historyApiFallback: true,
-    },
-    plugins: [
-        new CopyPlugin({
-            patterns: [
-                { from: path.resolve(__dirname, "src/npm_package.json"), to: "package.json" }
-            ],
-        }),
-    ],
-    module: {
-        rules: [{
-            test: /\.ts$/,
-            exclude: "/node_modules/",
-            use: "ts-loader",
-        },
-            {
-            test: "/^npm_package.json/",
-            type: "asset/resource",
-            generator: {
-                filename: "package.json"
-            }
-        }
-      ]
-    }
-}
+//Require webpack specific tools
+const { merge } = require('webpack-merge')
 
-const prod = {
-    ...dev,
-    name:'prod',
-    mode: 'production',
-    optimization: {
-        minimize: true,
-        minimizer: [
-            new TerserPlugin({
-                extractComments: 'all'
-            })
-        ]
-    }
-}
+//Require base conf
+const common = require("../webpack/webpack.common");
 
-module.exports = [dev, prod];
+//Setup server environment definitions and get current environment
+const envs = { development: "dev", production: "prod" };
+const env = envs[process.env.NODE_ENV || "development"];
+
+//Require conf that matches server environment
+const envConfig = require(`../webpack/webpack.${env}.js`);
+
+//Require local conf with overrides that matches server environment
+const localEnvConfig = require(`./webpack.${env}.js`);
+
+//Require webcomponent specific entry and index.html path
+const webcomponentPathConfig = require(`../webpack/webpack.webcomponent-paths`);
+
+module.exports = merge(common, envConfig, localEnvConfig, webcomponentPathConfig )
