@@ -1,7 +1,7 @@
 {
-  "name": "@test_kbdk/kb-footer",
-  "version": "1.1.0",
-  "description": "A footer with kb design and links.",
+  "name": "@kb-dk/kb-icon",
+  "version": "1.0.0",
+  "description": "KB icon web component.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,12 +10,9 @@
     "type": "git",
     "url": "git+https://github.com/kb-dk/kb-web-components.git"
   },
-  "dependencies": {
-    "bootstrap": "^5.2.3"
-  },
   "keywords": [
     "kb",
-    "footer"
+    "icons"
   ],
   "author": "",
   "license": "ISC",
