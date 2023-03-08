@@ -1,5 +1,5 @@
 {
-  "name": "@test_kbdk/kb-footer",
+  "name": "@kb-dk/kb-footer",
   "version": "1.1.0",
   "description": "A footer with kb design and links.",
   "main": "index.js",

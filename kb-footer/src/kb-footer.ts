@@ -31,26 +31,7 @@ export class KbFooter extends LitElement {
             font-size: 1rem;
             line-height: 1.5;
           }
-
-          kb-icon {
-            peak: none;
-            overflow-wrap: normal;
-            font-feature-settings: "liga";
-            -webkit-font-smoothing: antialiased;
-            text-rendering: optimizelegibility;
-            direction: ltr;
-            display: inline-block;
-            font-size: 18px;
-            font-style: normal;
-            font-variant-ligatures: discretionary-ligatures;
-            font-weight: 400;
-            letter-spacing: normal;
-            line-height: 1;
-            text-transform: none;
-            white-space: nowrap;
-          }
-
-
+          
           footer.global-footer .container {
             padding-left: 24px;
             padding-right: 24px;
@@ -161,7 +142,8 @@ export class KbFooter extends LitElement {
             }
           }
 
-          footer.global-footer li, footer.global-footer p {
+          footer.global-footer li, 
+          footer.global-footer p{
             margin-bottom: 12px;
           }
 

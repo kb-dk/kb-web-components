@@ -3,12 +3,13 @@ import {html, TemplateResult} from "lit";
 import {AsyncDirective} from "lit-html/async-directive.js";
 import type {Part, DirectiveParameters} from 'lit/directive.js';
 import "@kb-dk/kb-icon/index.js";
+import {defaultsColumns} from './default_column_data.js';
 
 class KbFooterColumn extends AsyncDirective {
 
     update = (part:Part, [column]: DirectiveParameters<this>): void => {
         let footerColumnDataUrl: string = `/jsonapi/node/site/e065d5e7-a348-4384-9859-c17841d03019?fields[node--site]=footer_column_${column}`;
-        return this.fetchData(footerColumnDataUrl, column);
+        this.fetchData(footerColumnDataUrl, column);
     };
 
     fetchData = (url: string, column: number): void => {
@@ -16,11 +17,21 @@ class KbFooterColumn extends AsyncDirective {
             .then(response => response.json())
             .then(responseJson => responseJson.data.attributes[`footer_column_${column}`])
             .then(data =>  this.setValue(this.getHtml(data, column)))
+            .then(() => column === 1 ? this.getAppFooterColumn() : '')
             .catch((error) => {
-                this.setValue(this.getHtml([], column));
+                this.setValue(this.getHtml(defaultsColumns.data.attributes[`footer_column_${column}`], column));
+                column === 1 ? this.getAppFooterColumn() : '';
             });
     };
 
+    getAppFooterColumn = () : void => {
+        let ul = document.querySelector('#appFooterColumn');
+        if (ul){
+            let shadowRoot = document.querySelector('kb-footer')?.shadowRoot;
+            shadowRoot?.querySelector('.col-sm-6.col-lg-3 ul')?.remove();
+            shadowRoot?.querySelector('.col-sm-6.col-lg-3')?.append(ul);
+        }
+    }
     lastColumnDA = html`
         <div class="col-sm-6 col-lg-3">
             <div class="rdl-logo rdl-logo-inverted">
@@ -60,6 +71,8 @@ class KbFooterColumn extends AsyncDirective {
     `;
 
     ariaLabels = ['header-1727917245', 'header-570114362', 'header-1331148665'];
+    // TODO: KBs API return relative Drupal / kb.dk uris, which is getting fixed here.
+    //  Remove the fix when it is fixed in Drupal.
     getColumnHtml = (listData, column) => html`
         <div class="col-sm-6 col-lg-3" aria-labelledby="${this.ariaLabels[column]}">
             <h2 class="h3" id="${this.ariaLabels[column]}">${listData[0]?.title}</h2>
@@ -70,26 +83,16 @@ class KbFooterColumn extends AsyncDirective {
         </div>
     `;
 
-    getLastColumnHtml = listData => {
-        // const dom = new DOMParser().parseFromString(listData,'text/html');
-        // const content = dom.querySelector('div');
-        // return html`
-        //     ${content}
-        // `;
-        return this.lastColumnDA;
-    };
-
     getHtml = (data, column) => {
         if (column === 4){
-            if (data.length === 0){
-                data = this.lastColumnDA;
-            }
-            return this.getLastColumnHtml(data);
+            // TODO: for now the last column is hard coded.
+            //  It needs to be change in Drupal / kb.dk so it doesn't return the whole html, but the items.
+            return this.lastColumnDA;
         }
         return this.getColumnHtml(data, column);
     }
 
-    render = (column: number): TemplateResult => this.getHtml([], column);
+    render = (column: number): TemplateResult => this.getHtml(defaultsColumns, column);
 
     private getUri(uri) {
         uri = uri.startsWith("entity:node") ? "https://www.kb.dk/" + uri.substring(7) : uri;
