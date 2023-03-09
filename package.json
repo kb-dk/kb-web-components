@@ -1,6 +1,6 @@
 {
-  "name": "@test_kbdk",
-  "version": "0.3.0",
+  "name": "kb-dk",
+  "version": "1.0.0",
   "description": "KB web components.",
   "engines": {
     "node": "^19.6.1"
