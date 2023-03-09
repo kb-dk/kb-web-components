@@ -1,9 +1,30 @@
-import {LitElement, html} from "lit";
+import {LitElement, html, css} from "lit";
 import {customElement, property} from "lit/decorators.js";
 import {icons} from "./icon-list";
 
 @customElement('kb-icon')
 export class KbIcon extends LitElement {
+
+    static styles = css
+            `
+    :host {
+    peak: none;
+    overflow-wrap: normal;
+    font-feature-settings: "liga";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizelegibility;
+    direction: ltr;
+    display: inline-block;
+    font-size: 18px;
+    font-style: normal;
+    font-variant-ligatures: discretionary-ligatures;
+    font-weight: 400;
+    letter-spacing: normal;
+    line-height: 1;
+    text-transform: none;
+    white-space: nowrap;
+}
+`;
 
     @property() name = '';
     @property() color = '#002e70';
