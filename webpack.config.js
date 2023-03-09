@@ -1,7 +1,5 @@
 //Require webpack specific tools
 const { merge } = require('webpack-merge')
-const HTMLWebpackPlugin = require("html-webpack-plugin");
-const path = require("path");
 
 //Require base conf
 const common = require("./webpack/webpack.common");
