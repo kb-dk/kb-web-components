@@ -2,9 +2,21 @@
   "name": "@kb-dk/kb-fonts",
   "version": "1.0.0",
   "description": "KB fonts and font styles.",
-  "main": "index.js",
+  "main": "main.ts",
+  "module": "main.ts",
+  "type": "module",
+  "engines": {
+    "node": "^19.6.1"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack-dev-server --config-name=dev",
+    "build": "webpack --config-name=prod"
+  },
+  "dependencies": {
+    "@lit/reactive-element": "^1.6.1",
+    "lit": "^2.6.1",
+    "lit-element": "^3.2.2",
+    "lit-html": "^2.6.1"
   },
   "repository": {
     "type": "git",
@@ -14,14 +26,11 @@
     "kb",
     "fonts"
   ],
-
-  "dependencies": {
-    "lit": "^2.6.1"
-  },
-  "author": "",
+  "author": "Royal Danish library",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/kb-dk/kb-web-components/issues"
   },
   "homepage": "https://github.com/kb-dk/kb-web-components#readme"
 }
+
