@@ -16,7 +16,15 @@ module.exports = {
     }),
     new CopyPlugin({
         patterns: [
-            { from: path.resolve("./src/npm_package.json"), to: "package.json" }
+            { from: path.resolve("./README.md")},
+            { from: path.resolve("./package.json"),
+                transform(content) {
+                    let json = JSON.parse(content.toString());
+                    json["main"] = 'index.js';
+                    json["module"] = 'index.js';
+                    return Buffer.from(JSON.stringify(json, null, 2), "utf-8");
+                },
+            },
         ],
     })
 ],
