@@ -1,6 +1,6 @@
 import {LitElement, html, css} from "lit";
 import {customElement, property} from "lit/decorators.js";
-import {icons} from "./icon-list";
+import {icons} from "./icon-list.js";
 
 @customElement('kb-icon')
 export class KbIcon extends LitElement {
