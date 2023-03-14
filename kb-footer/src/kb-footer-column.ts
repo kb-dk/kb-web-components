@@ -3,7 +3,7 @@ import {html, TemplateResult} from "lit";
 import {AsyncDirective} from "lit-html/async-directive.js";
 import type {Part, DirectiveParameters} from 'lit/directive.js';
 import "@kb-dk/kb-icon/index.js";
-import {defaultsColumns} from './default_column_data.js';
+import {defaultsColumnsDA, defaultsColumnsEN, lastColumnDA, lastColumnEN} from './default_column_data.js';
 
 class KbFooterColumn extends AsyncDirective {
 
@@ -12,14 +12,16 @@ class KbFooterColumn extends AsyncDirective {
         this.fetchData(footerColumnDataUrl, column);
     };
 
-    fetchData = (url: string, column: number): void => {
+    fetchData = (url: string, column: number, language: string): void => {
         fetch(url)
             .then(response => response.json())
             .then(responseJson => responseJson.data.attributes[`footer_column_${column}`])
-            .then(data =>  this.setValue(this.getHtml(data, column)))
+            .then(data =>  this.setValue(this.getHtml(data, column, language)))
             .then(() => column === 1 ? this.getAppFooterColumn() : '')
             .catch((error) => {
-                this.setValue(this.getHtml(defaultsColumns.data.attributes[`footer_column_${column}`], column));
+                console.error(error);
+                let defaultsColumns = language === 'en' ? defaultsColumnsEN : defaultsColumnsDA;
+                this.setValue(this.getHtml(defaultsColumns.data.attributes[`footer_column_${column}`], column, language));
                 column === 1 ? this.getAppFooterColumn() : '';
             });
     };
@@ -32,43 +34,6 @@ class KbFooterColumn extends AsyncDirective {
             shadowRoot?.querySelector('.col-sm-6.col-lg-3')?.append(ul);
         }
     }
-    lastColumnDA = html`
-        <div class="col-sm-6 col-lg-3">
-            <div class="rdl-logo rdl-logo-inverted">
-                <span class="sr-only">Kontaktinformationer</span>
-            </div>
-
-            <div><p><a href="https://www.kb.dk/spoerg-biblioteket">Spørg biblioteket</a></p></div>
-            <div>
-                <p><a href="https://www.kb.dk/om-os/kontakt">kb@kb.dk</a></p>
-            </div>
-            <div aria-label="telefonnummer">
-                <p>Tel: <a href="tel:+4533474747">(+45) 3347 4747</a></p>
-            </div>
-            <div><p><a href="https://www.kb.dk/om-os/presse">Pressekontakt</a></p></div>
-            <div aria-label="EAN nummer">
-                <p>EAN: 5798000795297</p>
-            </div>
-            <div class="some-icons">
-                <a href="https://www.instagram.com/detkglbibliotek/">
-                    <kb-icon name="instagram" aria-hidden="true"></kb-icon>
-                    <span class="sr-only">Følg os på Instagram</span>
-                </a>
-                <a href="https://www.facebook.com/DetKglBibliotek/">
-                    <kb-icon name="facebook" aria-hidden="true"></kb-icon>
-                    <span class="sr-only">Følg os på facebook</span>
-                </a>
-                <a href="https://www.linkedin.com/company/det-kgl-bibliotek/">
-                    <kb-icon name="linkedin" aria-hidden="true"></kb-icon>
-                    <span class="sr-only">Følg os på LinkedIn</span>
-                </a>
-                <a href="https://twitter.com/DetKglBibliotek">
-                    <kb-icon name="twitter" aria-hidden="true"></kb-icon>
-                    <span class="sr-only">Følg os på twitter</span>
-                </a>
-            </div>
-        </div>
-    `;
 
     ariaLabels = ['header-1727917245', 'header-570114362', 'header-1331148665'];
     // TODO: KBs API return relative Drupal / kb.dk uris, which is getting fixed here.
@@ -83,16 +48,19 @@ class KbFooterColumn extends AsyncDirective {
         </div>
     `;
 
-    getHtml = (data, column) => {
+    getHtml = (data, column: number, language: string) => {
         if (column === 4){
             // TODO: for now the last column is hard coded.
             //  It needs to be change in Drupal / kb.dk so it doesn't return the whole html, but the items.
-            return this.lastColumnDA;
+            return language === 'en' ? lastColumnEN : lastColumnDA;
         }
         return this.getColumnHtml(data, column);
     }
 
-    render = (column: number): TemplateResult => this.getHtml(defaultsColumns, column);
+    render = (column: number, language: string): TemplateResult => {
+        let defaultsColumns = language === 'en' ? defaultsColumnsEN : defaultsColumnsDA;
+        return this.getHtml(defaultsColumns, column, language);
+    }
 
     private getUri(uri) {
         uri = uri.startsWith("entity:node") ? "https://www.kb.dk/" + uri.substring(7) : uri;
