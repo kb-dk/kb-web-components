@@ -1,9 +1,13 @@
 ## kb-footer
-kb-footer is a web component which shows KB design footer. Moreover column items come from from kb.dk footer API. 
+kb-footer is a web component which shows KB design footer. Moreover, column items come from kb.dk footer API. 
 In kb design manual, every application has to use exactly the same footer at in kb.dk, except for the first column which can be application specific.
 
 ### Properties
-No properties
+
+| Property | Attribute |        Description        |    Type     | Default |
+|:--------:|:---------:|:-------------------------:|:-----------:|:-------:|
+| language | language  | The language of the page. | "da" / "en" |  "da"   |  
+
 
 ### Examples
 1. Exactly as in kb.dk
@@ -23,6 +27,10 @@ No properties
       </ul>
     </kb-footer> 
     ```
+3. English footer
+   ```
+   <kb-footer language="en"></kb-footer> 
+   ``` 
 
 
 

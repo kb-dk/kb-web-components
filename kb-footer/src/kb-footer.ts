@@ -1,17 +1,18 @@
 import {LitElement, css, html} from "lit";
 import {kbFooterColumn} from "./kb-footer-column";
-import {customElement} from "lit/decorators.js";
+import {customElement, property} from "lit/decorators.js";
 import {BSContainer, BSRow, BSColSM6, BSColLG3, BSH3, KBColors} from "@kb-dk/kb-style/index.js"
 
 @customElement('kb-footer')
 export class KbFooter extends LitElement {
 
+    @property() language = 'da';
     render() {
         return html`
             <footer class="global-footer">
                 <nav class="container">
                     <div class="row">
-                        ${[1, 2, 3, 4].map(i => html`${kbFooterColumn(i)}`)}
+                        ${[1, 2, 3, 4].map(i => html`${kbFooterColumn(i, this.language)}`)}
                     </div>
                 </nav>
             </footer>
