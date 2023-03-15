@@ -2,7 +2,7 @@ import {directive} from "lit-html/directive.js";
 import {html, TemplateResult} from "lit";
 import {AsyncDirective} from "lit-html/async-directive.js";
 import type {Part, DirectiveParameters} from 'lit/directive.js';
-import "@kb-dk/kb-icon/index.js";
+import "@kb-dk/kb-icon";
 import {defaultsColumnsDA, defaultsColumnsEN, lastColumnDA, lastColumnEN} from './default_column_data.js';
 
 class KbFooterColumn extends AsyncDirective {
