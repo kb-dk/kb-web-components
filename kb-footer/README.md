@@ -8,16 +8,20 @@ In kb design manual, every application has to use exactly the same footer at in 
 |:--------:|:---------:|:-------------------------:|:-----------:|:-------:|
 | language | language  | The language of the page. | "da" / "en" |  "da"   |  
 
-
+### Additional considerations
+KB design allows the first column to be overwritten by the application but the other three must be the same as in kb.dk.
+- You can provide a ``` ul ``` element within the kb-footer which will be used as the first column.
+- ``` ul ``` element must have the following line inside ``` <style>kb-footer > ul {display: none;}</style> ```.
+- ``` ul ``` element must have its id sat to```appFooterColumnDA``` for Danish or ```appFooterColumnEN``` for English.
+- If an ``` ul ``` element has its id sat to ```appFooterColumn```, it will be used as the replacement for the missing language.
+     
 ### Examples
 1. Exactly as in kb.dk
   ``` 
   <kb-footer></kb-footer> 
   ```
 2. Footer with Application specific column 
-  - Note 1: ``` ul ``` element needs to have ``` id="appFooterColumn" ```
-  - Note 2: ``` <style>kb-footer > ul {display: none;}</style> ``` prevents from an un-styled ul flash in the start. 
-    ``` 
+  ```
     <kb-footer>
       <ul id="appFooterColumn">
           <style>kb-footer > ul {display: none;}</style>
@@ -26,13 +30,58 @@ In kb design manual, every application has to use exactly the same footer at in 
           <li><a href="#">Danmark Set Fra Lunften</a></li>
       </ul>
     </kb-footer> 
-    ```
+   ```
 3. English footer
    ```
    <kb-footer language="en"></kb-footer> 
-   ``` 
-
-
+   ```  
+4. Footer with application specific footer for each language (English and Danish)
+   ```
+   <kb-footer>
+      <ul id="appFooterColumnDA" >
+         <style>kb-footer > ul {display: none;}</style>
+         <li><a href="#">Om KBs Digitale samlinger</a></li>
+         <li><a href="#">Mediestream</a></li>
+         <li><a href="#">Danmark Set Fra Lunften</a></li>
+      </ul>
+      <ul id="appFooterColumnEN">
+         <style>kb-footer > ul {display: none;}</style>
+         <li><a href="#">About Digital collections</a></li>
+         <li><a href="#">Danmark from above</a></li>
+      </ul>
+   </kb-footer>
+   ```
+5. Change the language dynamically from within your application
+   1. HTML 
+      ```
+      <label for="language">Language:</label>
+      <select id="language">
+         <option value="da" selected>Dansk</option>
+         <option value="en">English</option>
+      </select>
+      <kb-footer>
+      <ul id="appFooterColumnDA" >
+         <style>kb-footer > ul {display: none;}</style>
+         <li><a href="#">Om KBs Digitale samlinger</a></li>
+         <li><a href="#">Mediestream</a></li>
+         <li><a href="#">Danmark Set Fra Lunften</a></li>
+      </ul>
+      <ul id="appFooterColumnEN">
+         <style>kb-footer > ul {display: none;}</style>
+         <li><a href="#">About Digital collections</a></li>
+         <li><a href="#">Danmark from above</a></li>
+      </ul>
+      </kb-footer>
+      ```
+   2. Javascript   
+      ```
+      <script>
+          document.getElementById('language').addEventListener('change', function() {
+             let footer = document.querySelector("kb-footer");
+             footer.language = this.value;
+          });
+       </script>
+      ```
 
 
 
