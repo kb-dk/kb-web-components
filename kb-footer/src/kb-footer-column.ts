@@ -46,29 +46,6 @@ class KbFooterColumn extends AsyncDirective {
         return ul ? ul : document.querySelector('#appFooterColumn');
     }
 
-    getAppFooterColumn2 = (language: string) : void => {
-        let uls = document.querySelectorAll(`ul`);
-        let shadowRoot = document.querySelector('kb-footer')?.shadowRoot;
-        if (uls.length){
-            console.log('uls:', uls);
-            shadowRoot?.querySelector('.col-sm-6.col-lg-3 ul')?.remove();
-        }
-
-        uls.forEach((ul, index)=> {
-            if (language === 'en' && ul.id === 'appFooterColumn'){
-               console.log(ul);
-            }
-            shadowRoot?.querySelector('.col-sm-6.col-lg-3')?.append(ul);
-        })
-        // uls = uls ? uls : document.querySelector('#appFooterColumn');
-        // console.log(document, document.querySelector('#appFooterColumn'));
-        // if (uls.length){
-        //     let shadowRoot = document.querySelector('kb-footer')?.shadowRoot;
-        //     shadowRoot?.querySelector('.col-sm-6.col-lg-3 ul')?.remove();
-        //     uls.map(shadowRoot?.querySelector('.col-sm-6.col-lg-3')?.append(uls[i]))
-        // }
-    }
-
     ariaLabels = ['header-1727917245', 'header-570114362', 'header-1331148665'];
     // TODO: KBs API return relative Drupal / kb.dk uris, which is getting fixed here.
     //  Remove the fix when it is fixed in Drupal.
