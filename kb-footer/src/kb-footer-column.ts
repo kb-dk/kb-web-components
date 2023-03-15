@@ -7,9 +7,9 @@ import {defaultsColumnsDA, defaultsColumnsEN, lastColumnDA, lastColumnEN} from '
 
 class KbFooterColumn extends AsyncDirective {
 
-    update = (part:Part, [column]: DirectiveParameters<this>): void => {
-        let footerColumnDataUrl: string = `/jsonapi/node/site/e065d5e7-a348-4384-9859-c17841d03019?fields[node--site]=footer_column_${column}`;
-        this.fetchData(footerColumnDataUrl, column);
+    update = (part:Part, [column, language]: DirectiveParameters<this>): void => {
+        let footerColumnDataUrl: string = `https://www.kb.dk${language === 'en' ? "/en" : ""}/jsonapi/node/site/e065d5e7-a348-4384-9859-c17841d03019?fields[node--site]=footer_column_${column}`;
+        this.fetchData(footerColumnDataUrl, column, language);
     };
 
     fetchData = (url: string, column: number, language: string): void => {
