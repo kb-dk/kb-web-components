@@ -17,22 +17,56 @@ class KbFooterColumn extends AsyncDirective {
             .then(response => response.json())
             .then(responseJson => responseJson.data.attributes[`footer_column_${column}`])
             .then(data =>  this.setValue(this.getHtml(data, column, language)))
-            .then(() => column === 1 ? this.getAppFooterColumn() : '')
+            .then(() => column === 1 ? this.getAppFooterColumn(language) : '')
             .catch((error) => {
                 console.error(error);
                 let defaultsColumns = language === 'en' ? defaultsColumnsEN : defaultsColumnsDA;
                 this.setValue(this.getHtml(defaultsColumns.data.attributes[`footer_column_${column}`], column, language));
-                column === 1 ? this.getAppFooterColumn() : '';
+                column === 1 ? this.getAppFooterColumn(language) : '';
             });
     };
 
-    getAppFooterColumn = () : void => {
-        let ul = document.querySelector('#appFooterColumn');
+    getAppFooterColumn = (language: string) : void => {
+        let ul = this.getAppColumn(language);
         if (ul){
-            let shadowRoot = document.querySelector('kb-footer')?.shadowRoot;
-            shadowRoot?.querySelector('.col-sm-6.col-lg-3 ul')?.remove();
-            shadowRoot?.querySelector('.col-sm-6.col-lg-3')?.append(ul);
+            let clonedUl = ul.cloneNode(true);
+            this.addColumnToFooter(clonedUl);
         }
+    }
+
+    private addColumnToFooter(clonedUl: Node) {
+        let shadowRoot = document.querySelector('kb-footer')?.shadowRoot;
+        shadowRoot?.querySelector('.col-sm-6.col-lg-3 ul')?.remove();
+        shadowRoot?.querySelector('.col-sm-6.col-lg-3')?.append(clonedUl);
+    }
+
+    private getAppColumn(language: string) {
+        let columnId = language === 'en' ? 'appFooterColumnEN' : 'appFooterColumnDA';
+        let ul = document.querySelector(`#${CSS.escape(columnId)}`);
+        return ul ? ul : document.querySelector('#appFooterColumn');
+    }
+
+    getAppFooterColumn2 = (language: string) : void => {
+        let uls = document.querySelectorAll(`ul`);
+        let shadowRoot = document.querySelector('kb-footer')?.shadowRoot;
+        if (uls.length){
+            console.log('uls:', uls);
+            shadowRoot?.querySelector('.col-sm-6.col-lg-3 ul')?.remove();
+        }
+
+        uls.forEach((ul, index)=> {
+            if (language === 'en' && ul.id === 'appFooterColumn'){
+               console.log(ul);
+            }
+            shadowRoot?.querySelector('.col-sm-6.col-lg-3')?.append(ul);
+        })
+        // uls = uls ? uls : document.querySelector('#appFooterColumn');
+        // console.log(document, document.querySelector('#appFooterColumn'));
+        // if (uls.length){
+        //     let shadowRoot = document.querySelector('kb-footer')?.shadowRoot;
+        //     shadowRoot?.querySelector('.col-sm-6.col-lg-3 ul')?.remove();
+        //     uls.map(shadowRoot?.querySelector('.col-sm-6.col-lg-3')?.append(uls[i]))
+        // }
     }
 
     ariaLabels = ['header-1727917245', 'header-570114362', 'header-1331148665'];
@@ -43,7 +77,7 @@ class KbFooterColumn extends AsyncDirective {
             <h2 class="h3" id="${this.ariaLabels[column]}">${listData[0]?.title}</h2>
             <ul>
                 ${listData.slice(1).map(itemData => html`
-                    <li><a href="${this.getUri(itemData.uri)}">${itemData.title.includes(":cookie:") ? itemData.title.substring(8) : itemData.title}</a></li>`)}
+                    <li><a href="${this.fixLink(itemData.uri)}">${itemData.title.includes(":cookie:") ? itemData.title.substring(8) : itemData.title}</a></li>`)}
             </ul>
         </div>
     `;
@@ -62,7 +96,7 @@ class KbFooterColumn extends AsyncDirective {
         return this.getHtml(defaultsColumns, column, language);
     }
 
-    private getUri(uri) {
+    private fixLink(uri) {
         uri = uri.startsWith("entity:node") ? "https://www.kb.dk/" + uri.substring(7) : uri;
         uri = uri.startsWith("internal:") ? "https://www.kb.dk" + uri.substring(9) : uri;
         uri = uri.match("route:<nolink>") ? "javascript:void();" : uri;
