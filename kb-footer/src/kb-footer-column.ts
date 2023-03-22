@@ -8,7 +8,7 @@ import {defaultsColumnsDA, defaultsColumnsEN, lastColumnDA, lastColumnEN} from '
 class KbFooterColumn extends AsyncDirective {
 
     update = (part:Part, [column, language]: DirectiveParameters<this>): void => {
-        let footerColumnDataUrl: string = `/footerapi${language === 'en' ? "/en" : ""}/jsonapi/node/site/e065d5e7-a348-4384-9859-c17841d03019?fields[node--site]=footer_column_${column}`;
+        const footerColumnDataUrl: string = `/footerapi${language === 'en' ? "/en" : ""}/jsonapi/node/site/e065d5e7-a348-4384-9859-c17841d03019?fields[node--site]=footer_column_${column}`;
         this.fetchData(footerColumnDataUrl, column, language);
     };
 
@@ -27,9 +27,9 @@ class KbFooterColumn extends AsyncDirective {
     };
 
     getAppFooterColumn = (language: string) : void => {
-        let ul = this.getAppColumn(language);
+        const ul = this.getAppColumn(language);
         if (ul){
-            let clonedUl = ul.cloneNode(true);
+            const clonedUl = ul.cloneNode(true);
             this.addColumnToFooter(clonedUl);
         }
     }
