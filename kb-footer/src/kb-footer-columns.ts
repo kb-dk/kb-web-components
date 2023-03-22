@@ -11,7 +11,7 @@ class KbFooterColumns extends AsyncDirective {
     language = 'da';
 
     // update = (part:Part, [language]: DirectiveParameters<this>): void => {
-    //     let KBFooterUrl: string = `/footer-api${language === 'en' ? "/en" : ""}/jsonapi/node/site/e065d5e7-a348-4384-9859-c17841d03019`;
+    //     const KBFooterUrl: string = `/footer-api${language === 'en' ? "/en" : ""}/jsonapi/node/site/e065d5e7-a348-4384-9859-c17841d03019`;
     //     this.updateColumnsWithKBData(KBFooterUrl, language);
     // };
     updateColumnsWithKBData = async (url: string) => {
@@ -24,22 +24,22 @@ class KbFooterColumns extends AsyncDirective {
     };
 
     replaceFirstColumnWithAppColumnIfExist = () : void => {
-        let ul = this.getAppColumn();
+        const ul = this.getAppColumn();
         if (ul){
-            let clonedUl = ul.cloneNode(true);
+            const clonedUl = ul.cloneNode(true);
             this.addColumnToFooter(clonedUl);
         }
     }
 
     private addColumnToFooter(clonedUl: Node) {
-        let shadowRoot = document.querySelector('kb-footer')?.shadowRoot;
+        const shadowRoot = document.querySelector('kb-footer')?.shadowRoot;
         shadowRoot?.querySelector('.col-sm-6.col-lg-3 ul')?.remove();
         shadowRoot?.querySelector('.col-sm-6.col-lg-3')?.append(clonedUl);
     }
 
     private getAppColumn() {
-        let columnId = this.language === 'en' ? 'appFooterColumnEN' : 'appFooterColumnDA';
-        let ul = document.querySelector(`#${CSS.escape(columnId)}`);
+        const columnId = this.language === 'en' ? 'appFooterColumnEN' : 'appFooterColumnDA';
+        const ul = document.querySelector(`#${CSS.escape(columnId)}`);
         return ul ? ul : document.querySelector('#appFooterColumn');
     }
 
