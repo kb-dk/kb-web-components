@@ -8,7 +8,7 @@ import {defaultsColumnsDA, defaultsColumnsEN, lastColumnDA, lastColumnEN} from '
 class KbFooterColumn extends AsyncDirective {
 
     update = (part:Part, [column, language]: DirectiveParameters<this>): void => {
-        const footerColumnDataUrl: string = `/footerapi${language === 'en' ? "/en" : ""}/jsonapi/node/site/e065d5e7-a348-4384-9859-c17841d03019?fields[node--site]=footer_column_${column}`;
+        const footerColumnDataUrl: string = `/footer-api${language === 'en' ? "/en" : ""}/jsonapi/node/site/e065d5e7-a348-4384-9859-c17841d03019?fields[node--site]=footer_column_${column}`;
         this.fetchData(footerColumnDataUrl, column, language);
     };
 
@@ -62,7 +62,7 @@ class KbFooterColumn extends AsyncDirective {
     getHtml = (data, column: number, language: string) => {
         if (column === 4){
             // TODO: for now the last column is hard coded.
-            //  It needs to be change in Drupal / kb.dk so it doesn't return the whole html, but the items.
+            //  It needs to be change in Drupal / kb.dk, so it doesn't return the whole html, but the items.
             return language === 'en' ? lastColumnEN : lastColumnDA;
         }
         return this.getColumnHtml(data, column);
