@@ -1,5 +1,5 @@
 import {LitElement, css, html} from "lit";
-import {kbFooterColumn} from "./kb-footer-column";
+import {kbFooterColumns} from "./kb-footer-columns";
 import {customElement, property} from "lit/decorators.js";
 import {BSContainer, BSRow, BSColSM6, BSColLG3, BSH3, KBColors} from "@kb-dk/kb-style/index.js"
 
@@ -12,7 +12,7 @@ export class KbFooter extends LitElement {
             <footer class="global-footer">
                 <nav class="container">
                     <div class="row">
-                        ${[1, 2, 3, 4].map(i => html`${kbFooterColumn(i, this.language)}`)}
+                        ${kbFooterColumns(this.language)}
                     </div>
                 </nav>
             </footer>
