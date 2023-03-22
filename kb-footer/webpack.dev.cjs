@@ -1,17 +1,17 @@
 module.exports = {
     /*
-    * Devserver setup is specific to each webcomponent so we add it here
-    * as well as other local dev configs specific to this webcomponent
+    * DevServer setup is specific to each web-component, so we add it here
+    * as well as other local dev configs specific to this web-component
     */
     devServer: {
         static: "./dist",
         historyApiFallback: true,
         proxy: {
-            "/footerapi": {
+            "/footer-api": {
                 target: "https://www.kb.dk",
                 changeOrigin: true,
                 secure: true,
-                pathRewrite: {"^/footerapi": ""},
+                pathRewrite: {"^/footer-api": ""},
             }
         }
     }
