@@ -14,14 +14,17 @@ class KbFooterColumns extends AsyncDirective {
     update = (part:Part, [language]: DirectiveParameters<this>): void => {
         this.lang = language;
         const KBFooterUrl: string = `/footer-api${language === 'en' ? "/en" : ""}/jsonapi/node/site/e065d5e7-a348-4384-9859-c17841d03019`;
-        this.updateColumnsWithKBData(KBFooterUrl);
+        this.getKBFooterData(KBFooterUrl)
+            .then(data =>  this.setValue(this.getHtml(data)))
+            .then(() => this.replaceFirstColumnWithAppColumnIfExist());
     };
-    updateColumnsWithKBData = async (url: string) => {
-            return fetch(url)
+    getKBFooterData = async (url: string) => {
+            fetch(url)
                 .then(response => response.json())
-                .then(data =>  this.setValue(this.getHtml(data)))
-                .then(() => this.replaceFirstColumnWithAppColumnIfExist())
-                .catch((error) => console.error(error)
+                .catch((error) => {
+                        console.error(error);
+                        return this.defaultsColumns;
+                    }
                 );
     };
 
