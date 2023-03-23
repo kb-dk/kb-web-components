@@ -19,13 +19,13 @@ class KbFooterColumns extends AsyncDirective {
             .then(() => this.replaceFirstColumnWithAppColumnIfExist());
     };
     getKBFooterData = async (url: string) => {
-            fetch(url)
-                .then(response => response.json())
-                .catch((error) => {
-                        console.error(error);
-                        return this.defaultsColumns;
-                    }
-                );
+        fetch(url)
+            .then(response => response.json())
+            .catch((error) => {
+                    console.error(error);
+                    return this.defaultsColumns;
+                }
+            );
     };
 
     replaceFirstColumnWithAppColumnIfExist = () : void => {
