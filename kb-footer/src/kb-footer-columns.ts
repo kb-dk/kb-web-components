@@ -18,8 +18,8 @@ class KbFooterColumns extends AsyncDirective {
             .then(footerJson =>  this.setValue(this.getHtml(footerJson)))
             .then(() => this.replaceFirstColumnWithAppColumnIfExist());
     };
-    getKBFooterData = async (url: string) => {
-        fetch(url)
+    getKBFooterData = async (url: string): Promise<Object> => {
+        return fetch(url)
             .then(response => response.json())
             .catch((error) => {
                     console.error(error);
