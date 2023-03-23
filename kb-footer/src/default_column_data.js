@@ -1,6 +1,6 @@
 import {html} from "lit";
 
-export const defaultsColumnsDA = {
+export const columnsDA = {
     "jsonapi": {
         "version": "1.0",
         "meta": {
@@ -139,7 +139,8 @@ export const defaultsColumnsDA = {
         }
     }
 }
-export const defaultsColumnsEN = {
+
+export const columnsEN = {
     "jsonapi": {
         "version": "1.0",
         "meta": {
@@ -537,6 +538,7 @@ export const lastColumnDA = html`
             </div>
         </div>
     `;
+
 export const lastColumnEN = html`
     <div class="col-sm-6 col-lg-3">
         <div class="rdl-logo rdl-logo-inverted">    
@@ -569,3 +571,10 @@ export const lastColumnEN = html`
         </div>
     </div>
     `;
+
+export const headerAriaLabels = {
+    '1': 'header-1727917245',
+    '2': 'header-570114362',
+    '3': 'header-1331148665',
+    '4': ''
+};

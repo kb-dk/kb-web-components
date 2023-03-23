@@ -3,12 +3,12 @@ import {html, TemplateResult} from "lit";
 import {AsyncDirective} from "lit-html/async-directive.js";
 import type {Part, DirectiveParameters} from 'lit/directive.js';
 import "@kb-dk/kb-icon";
-import {defaultsColumnsDA, defaultsColumnsEN, lastColumnDA, lastColumnEN} from './default_column_data.js';
+import * as defaultFooter from './default_column_data.js';
 
 class KbFooterColumns extends AsyncDirective {
 
-    defaultsColumns = defaultsColumnsDA;
-    lastColumn = lastColumnDA;
+    defaultsColumns = defaultFooter.columnsDA;
+    lastColumn = defaultFooter.lastColumnDA;
     lang = 'da';
 
     update = (part:Part, [language]: DirectiveParameters<this>): void => {
@@ -49,12 +49,11 @@ class KbFooterColumns extends AsyncDirective {
         return ul ? ul : document.querySelector('#appFooterColumn');
     }
 
-    ariaLabels = ['header-1727917245', 'header-570114362', 'header-1331148665'];
     // TODO: KBs API return relative Drupal / kb.dk uris, which is getting fixed here.
     //  Remove the fix when it is fixed in Drupal.
     getColumnHtml = (listData, column):TemplateResult => html`
-        <div class="col-sm-6 col-lg-3" aria-labelledby="${this.ariaLabels[column]}">
-            <h2 class="h3" id="${this.ariaLabels[column]}">${listData[0]?.title}</h2>
+        <div class="col-sm-6 col-lg-3" aria-labelledby="${defaultFooter.headerAriaLabels[column]}">
+            <h2 class="h3" id="${defaultFooter.headerAriaLabels[column]}">${listData[0]?.title}</h2>
             <ul>
                 ${listData.slice(1).map(itemData => html`
                     <li><a href="${this.fixLink(itemData.uri)}">${itemData.title.includes(":cookie:") ? itemData.title.substring(8) : itemData.title}</a></li>`)}
@@ -71,8 +70,8 @@ class KbFooterColumns extends AsyncDirective {
     }
 
     render = (language: string): TemplateResult => {
-        this.defaultsColumns = language === 'en' ? defaultsColumnsEN : defaultsColumnsDA;
-        this.lastColumn = language === 'en' ? lastColumnEN : lastColumnDA;
+        this.defaultsColumns = language === 'en' ? defaultFooter.columnsEN : defaultFooter.columnsDA;
+        this.lastColumn = language === 'en' ? defaultFooter.lastColumnEN : defaultFooter.lastColumnDA;
         // I don't understand why lang won't update when language changes,
         // but the other two lines (above) get updated.
         // To fix this I added the same line to the update method as well.
