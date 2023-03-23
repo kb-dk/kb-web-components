@@ -1,6 +1,7 @@
 import {directive} from "lit-html/directive.js";
 import {html, TemplateResult} from "lit";
 import {AsyncDirective} from "lit-html/async-directive.js";
+import type {Part, DirectiveParameters} from 'lit/directive.js';
 import "@kb-dk/kb-icon";
 import {defaultsColumnsDA, defaultsColumnsEN, lastColumnDA, lastColumnEN} from './default_column_data.js';
 
@@ -8,12 +9,13 @@ class KbFooterColumns extends AsyncDirective {
 
     defaultsColumns = defaultsColumnsDA;
     lastColumn = lastColumnDA;
-    language = 'da';
+    lang = 'da';
 
-    // update = (part:Part, [language]: DirectiveParameters<this>): void => {
-    //     const KBFooterUrl: string = `/footer-api${language === 'en' ? "/en" : ""}/jsonapi/node/site/e065d5e7-a348-4384-9859-c17841d03019`;
-    //     this.updateColumnsWithKBData(KBFooterUrl, language);
-    // };
+    update = (part:Part, [language]: DirectiveParameters<this>): void => {
+        this.lang = language;
+        const KBFooterUrl: string = `/footer-api${language === 'en' ? "/en" : ""}/jsonapi/node/site/e065d5e7-a348-4384-9859-c17841d03019`;
+        this.updateColumnsWithKBData(KBFooterUrl);
+    };
     updateColumnsWithKBData = async (url: string) => {
             return fetch(url)
                 .then(response => response.json())
@@ -38,7 +40,7 @@ class KbFooterColumns extends AsyncDirective {
     }
 
     private getAppColumn() {
-        const columnId = this.language === 'en' ? 'appFooterColumnEN' : 'appFooterColumnDA';
+        const columnId = this.lang === 'en' ? 'appFooterColumnEN' : 'appFooterColumnDA';
         const ul = document.querySelector(`#${CSS.escape(columnId)}`);
         return ul ? ul : document.querySelector('#appFooterColumn');
     }
@@ -66,8 +68,11 @@ class KbFooterColumns extends AsyncDirective {
 
     render = (language: string): TemplateResult => {
         this.defaultsColumns = language === 'en' ? defaultsColumnsEN : defaultsColumnsDA;
-        this.language = language;
         this.lastColumn = language === 'en' ? lastColumnEN : lastColumnDA;
+        // I don't understand why lang won't update when language changes,
+        // but the other two lines (above) get updated.
+        // To fix this I added the same line to the update method as well.
+        this.lang = language;
         return this.getHtml(this.defaultsColumns);
     }
 
@@ -76,12 +81,6 @@ class KbFooterColumns extends AsyncDirective {
         uri = uri.startsWith("internal:") ? "https://www.kb.dk" + uri.substring(9) : uri;
         uri = uri.match("route:<nolink>") ? "javascript:void();" : uri;
         return uri;
-    }
-
-    private x(data) {
-        console.log('data', data);
-        this.setValue(this.getHtml(data));
-        this.replaceFirstColumnWithAppColumnIfExist()
     }
 }
 
