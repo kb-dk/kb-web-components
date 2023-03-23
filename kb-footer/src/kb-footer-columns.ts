@@ -15,7 +15,7 @@ class KbFooterColumns extends AsyncDirective {
         this.lang = language;
         const KBFooterUrl: string = `/footer-api${language === 'en' ? "/en" : ""}/jsonapi/node/site/e065d5e7-a348-4384-9859-c17841d03019`;
         this.getKBFooterData(KBFooterUrl)
-            .then(data =>  this.setValue(this.getHtml(data)))
+            .then(footerJson =>  this.setValue(this.getHtml(footerJson)))
             .then(() => this.replaceFirstColumnWithAppColumnIfExist());
     };
     getKBFooterData = async (url: string) => {
