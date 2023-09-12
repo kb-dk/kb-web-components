@@ -5,14 +5,6 @@ module.exports = {
     */
     devServer: {
         static: "./dist",
-        historyApiFallback: true,
-        proxy: {
-            "/footer-api": {
-                target: "https://www.kb.dk",
-                changeOrigin: true,
-                secure: true,
-                pathRewrite: {"^/footer-api": ""},
-            }
-        }
+        historyApiFallback: true
     }
 };
