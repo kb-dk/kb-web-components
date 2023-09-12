@@ -2,8 +2,8 @@ import {directive} from "lit-html/directive.js";
 import {html, TemplateResult} from "lit";
 import {AsyncDirective} from "lit-html/async-directive.js";
 import type {Part, DirectiveParameters} from 'lit/directive.js';
-import "@kb-dk/kb-icon";
 import * as defaultFooter from './default_column_data.js';
+import "@kb-dk/kb-icon";
 
 class KbFooterColumns extends AsyncDirective {
 
@@ -13,7 +13,7 @@ class KbFooterColumns extends AsyncDirective {
 
     update = (part:Part, [language]: DirectiveParameters<this>): void => {
         this.lang = language;
-        const KBFooterUrl: string = `/footer-api${language === 'en' ? "/en" : ""}/jsonapi/node/site/e065d5e7-a348-4384-9859-c17841d03019`;
+        const KBFooterUrl: string = `https://kbdk-devel.kb.dk${language === 'en' ? "/en" : ""}/jsonapi/node/site/e065d5e7-a348-4384-9859-c17841d03019?resourceVersion=id%3A41807`;
         this.getKBFooterData(KBFooterUrl)
             .then(footerJson =>  this.setValue(this.getHtml(footerJson)))
             .then(() => this.replaceFirstColumnWithAppColumnIfExist());
