@@ -1,9 +1,8 @@
 import {LitElement, css, html} from "lit";
 import {kbFooterColumns} from "./kb-footer-columns";
-import {customElement, property} from "lit/decorators.js";
+import {property} from "lit/decorators.js";
 import {BSContainer, BSRow, BSColSM6, BSColLG3, BSH3, KBColors} from "@kb-dk/kb-style/index.js"
 
-@customElement('kb-footer')
 export class KbFooter extends LitElement {
 
     @property() language = 'da';
@@ -181,4 +180,9 @@ export class KbFooter extends LitElement {
           }
         `
     ];
+}
+
+
+if (!customElements.get( 'kb-footer' )){
+    customElements.define('kb-footer', KbFooter);
 }

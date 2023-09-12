@@ -14,7 +14,7 @@
     "lit": "^2.6.1",
     "lit-element": "^3.2.2",
     "lit-html": "^2.6.1",
-    "@kb-dk/kb-footer": "2.0.0",
+    "@kb-dk/kb-footer": "2.1.0",
     "@kb-dk/kb-icon": "2.1.0",
     "@kb-dk/kb-style": "^1.4.2",
     "@nordhealth/components": "^2.16.0",
