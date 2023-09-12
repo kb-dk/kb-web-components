@@ -2,7 +2,6 @@ import {LitElement, html, css} from "lit";
 import {customElement, property} from "lit/decorators.js";
 import {icons} from "./icon-list.js";
 
-@customElement('kb-icon')
 export class KbIcon extends LitElement {
 
     static styles = css
@@ -75,4 +74,8 @@ export class KbIcon extends LitElement {
                 return "14px";
         }
     }
+}
+
+if (!customElements.get( 'kb-icon' )){
+    customElements.define('kb-icon', KbIcon);
 }
