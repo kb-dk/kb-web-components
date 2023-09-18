@@ -5,6 +5,7 @@ import type {Part, DirectiveParameters} from 'lit/directive.js';
 import * as defaultFooter from './default_column_data.js';
 import "@kb-dk/kb-icon";
 
+
 class KbFooterColumns extends AsyncDirective {
 
     defaultsColumns = defaultFooter.columnsDA;
@@ -13,7 +14,7 @@ class KbFooterColumns extends AsyncDirective {
 
     update = (part:Part, [language]: DirectiveParameters<this>): void => {
         this.lang = language;
-        const KBFooterUrl: string = `https://kbdk-devel.kb.dk${language === 'en' ? "/en" : ""}/jsonapi/node/site/e065d5e7-a348-4384-9859-c17841d03019?resourceVersion=id%3A41807`;
+        const KBFooterUrl: string = `${BASEURL}${language === 'en' ? "/en" : ""}${JSONAPIURL}`;
         this.getKBFooterData(KBFooterUrl)
             .then(footerJson =>  this.setValue(this.getHtml(footerJson)))
             .then(() => this.replaceFirstColumnWithAppColumnIfExist());
