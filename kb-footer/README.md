@@ -14,7 +14,10 @@ KB design allows the first column to be overwritten by the application but the o
 - ``` ul ``` element must have the following line inside ``` <style>kb-footer > ul {display: none;}</style> ```.
 - ``` ul ``` element must have its id sat to```appFooterColumnDA``` for Danish or ```appFooterColumnEN``` for English.
 - If an ``` ul ``` element has its id sat to ```appFooterColumn```, it will be used as the replacement for the missing language.
-     
+
+### Local configuratin needed
+You need two configuration files in the root folder of this web component. One called ``` .env.dev ``` and one called ``` .env.prod ```. In those files you need to specify the variables ``` BASEURL ``` and ``` JSONAPIURL ``` taylored to your local and production environment. The variables are needed to fetch non default footer data. Both filenames/locations are already added to .gitignore
+
 ### Examples
 1. Exactly as in kb.dk
   ``` 
