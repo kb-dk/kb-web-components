@@ -9,8 +9,8 @@
     "node": "^19.6.1"
   },
   "scripts": {
-    "start": "webpack-dev-server --mode development",
-    "build": "webpack --mode production"
+    "start": "cross-env NODE_ENV=development webpack-dev-server",
+    "build": "cross-env NODE_ENV=production webpack"
   },
   "dependencies": {
     "@kb-dk/kb-icon": "^2.1.0",
@@ -34,6 +34,7 @@
   },
   "homepage": "https://github.com/kb-dk/kb-web-components#readme",
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "dotenv-webpack": "^8.0.1"
   }
 }

@@ -1,5 +1,6 @@
 
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   mode: 'production',
@@ -13,7 +14,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin('dist', {})
+    new CleanWebpackPlugin()
   ]
 };
 
