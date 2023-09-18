@@ -1,11 +1,8 @@
-const webpack = require("webpack");
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
+        //specific production relevant config (local to the webcomponent) goes here
     plugins: [
-        new webpack.DefinePlugin({
-            BASEURL: JSON.stringify('https://www.kb.dk'),
-            JSONAPIURL: JSON.stringify('/jsonapi/node/site/e065d5e7-a348-4384-9859-c17841d03019')
-        })
+        new Dotenv({ path: '.env.prod' }), 
     ],
-    //specific production relevant config (local to the webcomponent) goes here
 };

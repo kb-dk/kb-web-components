@@ -10,3 +10,7 @@ node_modules
 *.njsproj
 *.sln
 *.sw?
+
+# Envs
+.env.dev
+.env.prod
