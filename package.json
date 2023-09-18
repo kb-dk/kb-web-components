@@ -41,6 +41,7 @@
     "webpack": "^5.76.3",
     "webpack-cli": "^5.0.1",
     "webpack-dev-server": "^4.11.1",
+    "dotenv-webpack": "^8.0.1",
     "cross-env": "^7.0.3"
   }
 }
