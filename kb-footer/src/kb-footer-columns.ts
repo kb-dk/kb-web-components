@@ -51,14 +51,14 @@ class KbFooterColumns extends AsyncDirective {
         return ul ? ul : document.querySelector('#appFooterColumn');
     }
 
-    // TODO: KBs API return relative Drupal / kb.dk uris, which is getting fixed here.
-    //  Remove the fix when it is fixed in Drupal.
+    // TODO: There are problems with /was and with coocki politics urls, which get fixed here.
+    //  Remove the fix when it is fixed in kb.dk jsonapi.
     getColumnHtml = (listData, column):TemplateResult => html`
         <div class="col-sm-6 col-lg-3" aria-labelledby="${defaultFooter.headerAriaLabels[column]}">
             <h2 class="h3" id="${defaultFooter.headerAriaLabels[column]}">${listData[0]?.title}</h2>
             <ul>
                 ${listData.slice(1).map(itemData => html`
-                    <li><a href="${this.fixLink(itemData.uri)}">${itemData.title.includes(":cookie:") ? itemData.title.substring(8) : itemData.title}</a></li>`)}
+                    <li><a href="${this.fixLink(itemData.full_url)}">${itemData.title.includes(":cookie:") ? itemData.title.substring(8) : itemData.title}</a></li>`)}
             </ul>
         </div>
     `;
@@ -82,9 +82,8 @@ class KbFooterColumns extends AsyncDirective {
     }
 
     private fixLink(uri) {
-        uri = uri.startsWith("entity:node") ? "https://www.kb.dk/" + uri.substring(7) : uri;
-        uri = uri.startsWith("internal:") ? "https://www.kb.dk" + uri.substring(9) : uri;
-        uri = uri.match("route:<nolink>") ? "javascript:void();" : uri;
+        uri = uri === "" ? "javascript:void(0);" : uri;
+        uri = uri === "/was" ? "https://www.kb.dk/was" : uri;
         return uri;
     }
 }
