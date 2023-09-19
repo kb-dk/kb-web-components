@@ -11,11 +11,11 @@ class KbFooterColumns extends AsyncDirective {
     defaultsColumns = defaultFooter.columnsDA;
     lastColumn = defaultFooter.lastColumnDA;
     lang = 'da';
-
-    update = (part:Part, [language]: DirectiveParameters<this>): void => {
+    cookieId = '';
+    update = (part:Part, [language, cookieId]: DirectiveParameters<this>): void => {
         this.lang = language;
-        console.log(process.env.BASEURL)
-       const KBFooterUrl: string = `${process.env.BASEURL}${language === 'en' ? "/en" : ""}${process.env.JSONAPIURL}`;
+        this.cookieId = cookieId;
+        const KBFooterUrl: string = `${process.env.BASEURL}${language === 'en' ? "/en" : ""}${process.env.JSONAPIURL}`;
         this.getKBFooterData(KBFooterUrl)
             .then(footerJson =>  this.setValue(this.getHtml(footerJson)))
             .then(() => this.replaceFirstColumnWithAppColumnIfExist());
@@ -57,8 +57,20 @@ class KbFooterColumns extends AsyncDirective {
         <div class="col-sm-6 col-lg-3" aria-labelledby="${defaultFooter.headerAriaLabels[column]}">
             <h2 class="h3" id="${defaultFooter.headerAriaLabels[column]}">${listData[0]?.title}</h2>
             <ul>
-                ${listData.slice(1).map(itemData => html`
-                    <li><a href="${this.fixLink(itemData.full_url)}">${itemData.title.includes(":cookie:") ? itemData.title.substring(8) : itemData.title}</a></li>`)}
+                ${listData.slice(1).map(itemData => {
+                    let item = html``;
+                    if (itemData.title.includes(":cookie:")){
+                        item = this.cookieId ? html`
+                        <li><a href="${this.fixLink(itemData.full_url)}"  id="csconsentlink">${this.fixCookie(itemData)}</a></li>
+                        ` : html``;
+                    } else {
+                        item = html`
+                        <li><a href="${this.fixLink(itemData.full_url)}">${itemData.title}</a></li>
+                        `;
+                    }
+                    return item;
+                    }
+                )}
             </ul>
         </div>
     `;
@@ -71,13 +83,14 @@ class KbFooterColumns extends AsyncDirective {
         return html`${footerHtml} ${this.lastColumn}`;
     }
 
-    render = (language: string): TemplateResult => {
+    render = (language: string, cookieId: string): TemplateResult => {
         this.defaultsColumns = language === 'en' ? defaultFooter.columnsEN : defaultFooter.columnsDA;
         this.lastColumn = language === 'en' ? defaultFooter.lastColumnEN : defaultFooter.lastColumnDA;
         // I don't understand why lang won't update when language changes,
         // but the other two lines (above) get updated.
         // To fix this I added the same line to the update method as well.
         this.lang = language;
+        this.cookieId = cookieId;
         return this.getHtml(this.defaultsColumns);
     }
 
@@ -85,6 +98,20 @@ class KbFooterColumns extends AsyncDirective {
         uri = uri === "" ? "javascript:void(0);" : uri;
         uri = uri === "/was" ? "https://www.kb.dk/was" : uri;
         return uri;
+    }
+
+    private fixCookie(itemData) {
+        if (this.cookieId){
+            this.addCookieScriptToHeader(this.cookieId);
+        }
+        return itemData.title.substring(8);
+    }
+
+    private addCookieScriptToHeader(id) {
+        let script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = `https://cookie-script.com/s/${id}.js`;
+        document.head.appendChild(script);
     }
 }
 

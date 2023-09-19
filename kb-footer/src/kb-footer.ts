@@ -6,12 +6,13 @@ import {BSContainer, BSRow, BSColSM6, BSColLG3, BSH3, KBColors} from "@kb-dk/kb-
 export class KbFooter extends LitElement {
 
     @property() language = 'da';
+    @property() cookieId = '';
     render() {
         return html`
             <footer class="global-footer">
                 <nav class="container">
                     <div class="row">
-                        ${kbFooterColumns(this.language)}
+                        ${kbFooterColumns(this.language, this.cookieId)}
                     </div>
                 </nav>
             </footer>
