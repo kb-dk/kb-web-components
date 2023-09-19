@@ -51,7 +51,7 @@ class KbFooterColumns extends AsyncDirective {
         return ul ? ul : document.querySelector('#appFooterColumn');
     }
 
-    // TODO: There are problems with /was and with coocki politics urls, which get fixed here.
+    // TODO: There are problems with '/was' and 'cookie' urls, which get fixed here.
     //  Remove the fix when it is fixed in kb.dk jsonapi.
     getColumnHtml = (listData, column):TemplateResult => html`
         <div class="col-sm-6 col-lg-3" aria-labelledby="${defaultFooter.headerAriaLabels[column]}">
