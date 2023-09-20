@@ -14,18 +14,5 @@ module.exports = {
     new HTMLWebpackPlugin({
         template: "./src/index.html"
     }),
-    new CopyPlugin({
-        patterns: [
-            { from: path.resolve("./README.md")},
-            { from: path.resolve("./package.json"),
-                transform(content) {
-                    let json = JSON.parse(content.toString());
-                    json["main"] = 'index.js';
-                    json["module"] = 'index.js';
-                    return Buffer.from(JSON.stringify(json, null, 2), "utf-8");
-                },
-            },
-        ],
-    })
 ],
 }

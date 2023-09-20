@@ -60,7 +60,7 @@ class KbFooterColumns extends AsyncDirective {
                 ${listData.slice(1).map(itemData => {
                     let item = html``;
                     if (itemData.title.includes(":cookie:")){
-                        item = this.cookieId ? html`
+                        item = this.cookieId && document.getElementById('csconsentlink')? html`
                         <li><a @click="${this.handleClick}" href="${this.fixLink(itemData.full_url)}"  id="csconsentlink">${this.fixCookie(itemData)}</a></li>
                         ` : html``;
                     } else {

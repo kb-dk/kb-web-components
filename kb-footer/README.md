@@ -4,9 +4,10 @@ In kb design manual, every application has to use exactly the same footer at in 
 
 ### Properties
 
-| Property | Attribute |        Description        |    Type     | Default |
-|:--------:|:---------:|:-------------------------:|:-----------:|:-------:|
-| language | language  | The language of the page. | "da" / "en" |  "da"   |  
+| Property | Attribute |        Description         |     Type      |  Default  |
+|:--------:|:---------:|:--------------------------:|:-------------:|:---------:|
+| language | language  | The language of the page.  |  "da" / "en"  |   "da"    | 
+| cookieId | cookieId  |   The id for the cookie.   |    string     |    ""     |
 
 ### Additional considerations
 KB design allows the first column to be overwritten by the application but the other three must be the same as in kb.dk.
@@ -17,6 +18,19 @@ KB design allows the first column to be overwritten by the application but the o
 
 ### Local configuratin needed
 You need two configuration files in the root folder of this web component. One called ``` .env.dev ``` and one called ``` .env.prod ```. In those files you need to specify the variables ``` BASEURL ``` and ``` JSONAPIURL ``` taylored to your local and production environment. The variables are needed to fetch non default footer data. Both filenames/locations are already added to .gitignore
+
+### Cookie script
+To add Cookie script, you need to pass the id of your site from https://cookie-script.com/ as a property to the footer.
+for example: 
+`<kb-footer cookieId="903181bb69e77c4a5adfc4ea71d034xx"></kb-footer>`
+It will insert the cookie script to the page.
+
+if you want to add the option of opening the cookie banner by clicking on ```Cookie Settings``` in the footer, then you need to add the following div to the kb-footer:
+```
+<kb-footer cookieId="903181bb69e77c4a5adfc4ea71d034xx">
+   <div id="csconsentlink" style="display: none;"></div>
+</kb-footer>
+```
 
 ### Examples
 1. Exactly as in kb.dk
