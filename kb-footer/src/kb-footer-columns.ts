@@ -61,7 +61,7 @@ class KbFooterColumns extends AsyncDirective {
                     let item = html``;
                     if (itemData.title.includes(":cookie:")){
                         item = this.cookieId ? html`
-                        <li><a href="${this.fixLink(itemData.full_url)}"  id="csconsentlink">${this.fixCookie(itemData)}</a></li>
+                        <li><a @click="${this.handleClick}" href="${this.fixLink(itemData.full_url)}"  id="csconsentlink">${this.fixCookie(itemData)}</a></li>
                         ` : html``;
                     } else {
                         item = html`
@@ -74,6 +74,13 @@ class KbFooterColumns extends AsyncDirective {
             </ul>
         </div>
     `;
+
+    handleClick = () => {
+        let cookie = document.getElementById('csconsentlink');
+        if (cookie){
+            cookie.click();
+        }
+    }
 
     getHtml = (data) => {
         let footerHtml: TemplateResult = html``;
