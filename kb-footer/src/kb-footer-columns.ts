@@ -14,6 +14,7 @@ class KbFooterColumns extends AsyncDirective {
     cookieId = '';
     update = (part:Part, [language, cookieId]: DirectiveParameters<this>): void => {
         this.lang = language;
+        this.lastColumn = language === 'en' ? defaultFooter.lastColumnEN : defaultFooter.lastColumnDA;
         this.cookieId = cookieId;
         const KBFooterUrl: string = `${process.env.BASEURL}${language === 'en' ? "/en" : ""}${process.env.JSONAPIURL}`;
         this.getKBFooterData(KBFooterUrl)
@@ -92,10 +93,10 @@ class KbFooterColumns extends AsyncDirective {
 
     render = (language: string, cookieId: string): TemplateResult => {
         this.defaultsColumns = language === 'en' ? defaultFooter.columnsEN : defaultFooter.columnsDA;
+        // I don't understand why lang and lastColumn won't update when language changes,
+        // but the first line (above) get updated.
+        // To fix this I added the same lines to the update method as well.
         this.lastColumn = language === 'en' ? defaultFooter.lastColumnEN : defaultFooter.lastColumnDA;
-        // I don't understand why lang won't update when language changes,
-        // but the other two lines (above) get updated.
-        // To fix this I added the same line to the update method as well.
         this.lang = language;
         this.cookieId = cookieId;
         return this.getHtml(this.defaultsColumns);

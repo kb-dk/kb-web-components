@@ -10,7 +10,7 @@
     "build": "cross-env NODE_ENV=production webpack"
   },
   "dependencies": {
-    "@kb-dk/kb-footer": "2.6.0",
+    "@kb-dk/kb-footer": "2.12.0",
     "@kb-dk/kb-icon": "2.1.0",
     "@kb-dk/kb-style": "^1.4.2",
     "@lit/reactive-element": "^1.6.1",
