@@ -134,14 +134,6 @@ export const columnsDA = {
                         ]
                     },
                     {
-                        "uri": "entity:node/1682",
-                        "full_url": "https://forcentraladministrationen.kb.dk/",
-                        "title": "For centraladministrationen",
-                        "options": [
-
-                        ]
-                    },
-                    {
                         "uri": "entity:node/970",
                         "full_url": "https://pro.kb.dk/pligtaflevering",
                         "title": "Pligtaflevering",
@@ -980,10 +972,6 @@ export const lastColumnDA = html`
                     <kb-icon name="linkedin" aria-hidden="true"></kb-icon>
                     <span class="sr-only">Følg os på LinkedIn</span>
                 </a>
-                <a href="https://twitter.com/DetKglBibliotek">
-                    <kb-icon name="twitter" aria-hidden="true"></kb-icon>
-                    <span class="sr-only">Følg os på twitter</span>
-                </a>
             </div>
         </div>
     `;
@@ -1012,10 +1000,6 @@ export const lastColumnEN = html`
             <a href="https://www.linkedin.com/company/det-kgl-bibliotek/">
                 <kb-icon name="linkedin" aria-hidden="true"></kb-icon>
                 <span class="sr-only">Follow us on LinkedIn</span>
-            </a>
-            <a href="https://twitter.com/DetKglBibliotek">
-                <kb-icon name="twitter" aria-hidden="true"></kb-icon>
-                <span class="sr-only">Follow us on Twitter</span>
             </a>
         </div>
     </div>
