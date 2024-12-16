@@ -9,14 +9,13 @@ import "@kb-dk/kb-icon";
 class KbFooterColumns extends AsyncDirective {
 
     defaultsColumns = defaultFooter.columnsDA;
-    lastColumn = defaultFooter.lastColumnDA;
     lang = 'da';
-    cookieId = '';
-    update = (part:Part, [language, cookieId]: DirectiveParameters<this>): void => {
+    uuId = '';
+    update = (part:Part, [language, uuId]: DirectiveParameters<this>): void => {
         this.lang = language;
-        this.lastColumn = language === 'en' ? defaultFooter.lastColumnEN : defaultFooter.lastColumnDA;
-        this.cookieId = cookieId;
-        const KBFooterUrl: string = `${process.env.BASEURL}${language === 'en' ? "/en" : ""}${process.env.JSONAPIURL}`;
+        this.uuId = uuId
+        const KBFooterUrl: string = `${process.env.BASEURL}${language === 'en' ? "/en" : ""}${process.env.JSONAPIURL}${this.uuId}`;
+        this.defaultsColumns = language === 'en' ? defaultFooter.columnsEN : defaultFooter.columnsDA;
         this.getKBFooterData(KBFooterUrl)
             .then(footerJson =>  this.setValue(this.getHtml(footerJson)))
             .then(() => this.replaceFirstColumnWithAppColumnIfExist());
@@ -52,21 +51,65 @@ class KbFooterColumns extends AsyncDirective {
         return ul ? ul : document.querySelector('#appFooterColumn');
     }
 
+    getLastColumnHtml (data): TemplateResult {
+        let lastCol: TemplateResult = html``;
+        let logo: TemplateResult = html``;
+        if (data.data.attributes[`footer_column_5`]) {
+            if (data.data.attributes[`footer_column_5`][0].title.includes("logo")) {
+                logo = html`
+                    <div class="rdl-logo rdl-logo-inverted"></div>`;
+            }
+            data.data.attributes[`footer_column_5`].forEach((element) => {
+                if (!element.title.includes("logo")) {
+                    if (element.full_url == '') {
+                        lastCol = html`${lastCol}
+                        <li role="none">${element.title}</li>`;
+                    } else {
+                        lastCol = html`${lastCol}
+                        <li role="none"><a role="menuitem" href="${(element.full_url)}">${element.title}</a></li>`;
+                    }
+                }
+            });
+            lastCol = html`${logo}
+            <ul role="menubar" aria-label="${data.data.attributes[`footer_column_5`][0].title}">${lastCol}</ul> `;
+            let soMeCol: TemplateResult = html``;
+            if (data.data.attributes[`footer_column_6`]) {
+                data.data.attributes[`footer_column_6`].forEach((element) => {
+                    if (element.icon) {
+                        soMeCol = html`${soMeCol}
+                        <a href=${element.uri}>
+                            <kb-icon name="${element.icon}" aria-hidden="true"></kb-icon>
+                            <span class="sr-only">${element.title}</span>
+                        </a>`
+                    }
+                });
+                soMeCol = html`
+                    <div class="some-icons">
+                        ${soMeCol}
+                    </div>`;
+            }
+            lastCol = html`
+                <div class="col-sm-6 col-lg-3">
+                    ${lastCol} ${soMeCol}
+                </div>`
+        }
+       return lastCol;
+    }
     // TODO: There are problems with '/was' and 'cookie' urls, which get fixed here.
     //  Remove the fix when it is fixed in kb.dk jsonapi.
     getColumnHtml = (listData, column):TemplateResult => html`
-        <div class="col-sm-6 col-lg-3" aria-labelledby="${defaultFooter.headerAriaLabels[column]}">
+        <div class="col-sm-6 col-lg-3">
             <h2 class="h3" id="${defaultFooter.headerAriaLabels[column]}">${listData[0]?.title}</h2>
-            <ul>
+            <ul role="menubar" aria-label="${listData[0]?.title}">
                 ${listData.slice(1).map(itemData => {
                     let item = html``;
                     if (itemData.title.includes(":cookie:")){
-                        item = this.cookieId && document.getElementById('csconsentlink')? html`
-                        <li><a @click="${this.handleClick}" href="${this.fixLink(itemData.full_url)}"  id="csconsentlink">${this.fixCookie(itemData)}</a></li>
-                        ` : html``;
+                        item = html`
+                        <li role="none"><a role="menuitem" href="javascript:void()"  id="csconsentlink">${this.fixCookie(itemData)}</a></li>
+                        `;
                     } else {
                         item = html`
-                        <li><a href="${this.fixLink(itemData.full_url)}">${itemData.title}</a></li>
+                        <li role="none"><a role="menuitem" href="${itemData.full_url}">${itemData.title}</a></li>
                         `;
                     }
                     return item;
@@ -76,51 +119,31 @@ class KbFooterColumns extends AsyncDirective {
         </div>
     `;
 
-    handleClick = () => {
-        let cookie = document.getElementById('csconsentlink');
-        if (cookie){
-            cookie.click();
-        }
-    }
 
     getHtml = (data) => {
         let footerHtml: TemplateResult = html``;
         for (let column = 1; column <= 3; column++){
             footerHtml = html`${footerHtml} ${this.getColumnHtml(data.data.attributes[`footer_column_${column}`], column)}`;
         }
-        return html`${footerHtml} ${this.lastColumn}`;
+        footerHtml = html`${footerHtml} ${this.getLastColumnHtml(data)}`
+        return html`${footerHtml}`;
     }
 
-    render = (language: string, cookieId: string): TemplateResult => {
+    render = (language: string, uuId: string): TemplateResult => {
         this.defaultsColumns = language === 'en' ? defaultFooter.columnsEN : defaultFooter.columnsDA;
         // I don't understand why lang and lastColumn won't update when language changes,
         // but the first line (above) get updated.
         // To fix this I added the same lines to the update method as well.
-        this.lastColumn = language === 'en' ? defaultFooter.lastColumnEN : defaultFooter.lastColumnDA;
         this.lang = language;
-        this.cookieId = cookieId;
+        this.uuId = uuId;
         return this.getHtml(this.defaultsColumns);
     }
 
-    private fixLink(uri) {
-        uri = uri === "" ? "javascript:void(0);" : uri;
-        uri = uri === "/was" ? "https://www.kb.dk/was" : uri;
-        return uri;
-    }
 
     private fixCookie(itemData) {
-        if (this.cookieId){
-            this.addCookieScriptToHeader(this.cookieId);
-        }
         return itemData.title.substring(8);
     }
 
-    private addCookieScriptToHeader(id) {
-        let script = document.createElement('script');
-        script.type = 'text/javascript';
-        script.src = `https://cookie-script.com/s/${id}.js`;
-        document.head.appendChild(script);
-    }
 }
 
 export const kbFooterColumns = directive(KbFooterColumns);
