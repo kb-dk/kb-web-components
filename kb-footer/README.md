@@ -4,10 +4,10 @@ In kb design manual, every application has to use exactly the same footer at in 
 
 ### Properties
 
-| Property | Attribute |                  Description                  |     Type      |  Default  |
-|:--------:|:---------:|:---------------------------------------------:|:-------------:|:---------:|
-| language | language  |           The language of the page.           |  "da" / "en"  |   "da"    | 
-|   uuId   |   uuId    | Universally Unique IDentifier (uuid) from drupal |    string     |    ""     |
+| Property | Attribute |                       Description                        |     Type      |  Default  |
+|:--------:|:---------:|:--------------------------------------------------------:|:-------------:|:---------:|
+| language | language  |                The language of the page.                 |  "da" / "en"  |   "da"    | 
+| jsonUuId |    jsonUuId     | Universally Unique IDentifier (uuid) of drupal site node |    string     |    ""     |
 
 ### Additional considerations
 KB design allows the first column to be overwritten by the application but the other three must be the same as in kb.dk.

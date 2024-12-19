@@ -10,11 +10,11 @@ class KbFooterColumns extends AsyncDirective {
 
     defaultsColumns = defaultFooter.columnsDA;
     lang = 'da';
-    uuId = '';
-    update = (part:Part, [language, uuId]: DirectiveParameters<this>): void => {
+    jsonUuId = '';
+    update = (part:Part, [language, jsonUuId]: DirectiveParameters<this>): void => {
         this.lang = language;
-        this.uuId = uuId
-        const KBFooterUrl: string = `${process.env.BASEURL}${language === 'en' ? "/en" : ""}${process.env.JSONAPIURL}${this.uuId}`;
+        this.jsonUuId = jsonUuId
+        const KBFooterUrl: string = `${process.env.BASEURL}${language === 'en' ? "/en" : ""}${process.env.JSONAPIURL}${this.jsonUuId}`;
         this.defaultsColumns = language === 'en' ? defaultFooter.columnsEN : defaultFooter.columnsDA;
         this.getKBFooterData(KBFooterUrl)
             .then(footerJson =>  this.setValue(this.getHtml(footerJson)))
@@ -105,7 +105,7 @@ class KbFooterColumns extends AsyncDirective {
                     let item = html``;
                     if (itemData.title.includes(":cookie:")){
                         item = html`
-                        <li role="none"><a role="menuitem" href="javascript:void()"  id="csconsentlink">${this.fixCookie(itemData)}</a></li>
+                        <li role="none"><a @click="${this.handleClick}" role="menuitem" href="javascript:void(0)" id="csconsentlink">${this.fixCookie(itemData)}</a></li>
                         `;
                     } else {
                         item = html`
@@ -119,7 +119,12 @@ class KbFooterColumns extends AsyncDirective {
         </div>
     `;
 
-
+    handleClick = () => {
+        let cookie = document.getElementById('csconsentlink');
+        if (cookie){
+            cookie.click();
+        }
+    }
     getHtml = (data) => {
         let footerHtml: TemplateResult = html``;
         for (let column = 1; column <= 3; column++){
@@ -129,13 +134,13 @@ class KbFooterColumns extends AsyncDirective {
         return html`${footerHtml}`;
     }
 
-    render = (language: string, uuId: string): TemplateResult => {
+    render = (language: string, jsonUuId: string): TemplateResult => {
         this.defaultsColumns = language === 'en' ? defaultFooter.columnsEN : defaultFooter.columnsDA;
         // I don't understand why lang and lastColumn won't update when language changes,
         // but the first line (above) get updated.
         // To fix this I added the same lines to the update method as well.
         this.lang = language;
-        this.uuId = uuId;
+        this.jsonUuId = jsonUuId;
         return this.getHtml(this.defaultsColumns);
     }
 
