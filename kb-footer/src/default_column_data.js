@@ -217,6 +217,79 @@ export const columnsDA = {
                     }
                 ],
                 "footer_column_4": "<div class=\"col-sm-6 col-lg-3\">\r\n<div class=\"rdl-logo rdl-logo-inverted\">\r\n    <span class=\"sr-only\">Kontaktinformationer</span>\r\n</div>\r\n\r\n<div><p><a href=\"/spoerg-biblioteket\">Spørg biblioteket</a></p></div>\r\n<div>\r\n<p><a href=\"/om-os/kontakt\">kb@kb.dk</a></p>\r\n</div>\r\n<div aria-label=\"telefonnummer\">\r\n<p>Tel: <a href=\"tel:+4533474747\">(+45) 3347 4747</a></p>\r\n</div>\r\n<div><p><a href=\"/om-os/presse\">Pressekontakt</a></p></div>\r\n<div aria-label=\"EAN nummer\">\r\n<p>EAN: 5798000795297</p>\r\n</div>\r\n<div class=\"some-icons\">\r\n<a href=\"https://www.facebook.com/DetKglBibliotek/\"><i class=\"rdl-icons\">rdl_facebook</i><span class=\"sr-only\">Følg os på facebook</span></a>\r\n<a href=\"https://www.instagram.com/detkglbibliotek/\"><i class=\"rdl-icons\">rdl_instagram</i><span class=\"sr-only\">Følg os på Instagram</span></a>\r\n<a href=\"https://www.linkedin.com/company/det-kgl-bibliotek/\"><i class=\"rdl-icons\">rdl_linkedin</i><span class=\"sr-only\">Følg os på LinkedIn</span></a>\r\n<a href=\"https://twitter.com/DetKglBibliotek\"><i class=\"rdl-icons\">rdl_twitter</i><span class=\"sr-only\">Følg os på twitter</span></a>\r\n</div>\r\n</div>\r\n",
+                "footer_column_5": [
+                    {
+                        "uri": "route:\u003Cnolink\u003E",
+                        "full_url": "",
+                        "title": "logo",
+                        "options": []
+                    },
+                    {
+                        "uri": "entity:node/242",
+                        "full_url": "https://kbdk-testing.kb.dk/spoerg-biblioteket",
+                        "title": "Spørg biblioteket",
+                        "options": []
+                    },
+                    {
+                        "uri": "mailto:kb@kb.dk",
+                        "full_url": "mailto:kb@kb.dk",
+                        "title": "kb@kb.dk",
+                        "options": []
+                    },
+                    {
+                        "uri": "route:\u003Cnolink\u003E",
+                        "full_url": "",
+                        "title": "Tel: (+45) 33 47 47 47",
+                        "options": []
+                    },
+                    {
+                        "uri": "entity:node/148",
+                        "full_url": "https://kbdk-testing.kb.dk/om-os/presse",
+                        "title": "Pressekontakt",
+                        "options": []
+                    },
+                    {
+                        "uri": "route:\u003Cnolink\u003E",
+                        "full_url": "",
+                        "title": "EAN: 5798000795297",
+                        "options": []
+                    }
+                ],
+                "footer_column_6": [
+                    {
+                        "uri": "https://www.facebook.com/DetKglBibliotek/",
+                        "title": "Følg os på Facebook",
+                        "text": "Følg os på Facebook",
+                        "new_window": 1,
+                        "relation": "",
+                        "icon": "facebook",
+                        "variant": "",
+                        "size": "",
+                        "options": []
+                    },
+                    {
+                        "uri": "https://www.instagram.com/detkglbibliotek/",
+                        "title": "Følg os på Instagram",
+                        "text": "Følg os på Instagram",
+                        "new_window": 1,
+                        "relation": "",
+                        "icon": "instagram",
+                        "variant": "",
+                        "size": "",
+                        "options": []
+                    },
+                    {
+                        "uri": "https://www.linkedin.com/company/det-kgl-bibliotek/",
+                        "title": "Følg os på LinkedIn",
+                        "text": "Følg os på LinkedIn",
+                        "new_window": 1,
+                        "relation": "",
+                        "icon": "linkedin",
+                        "variant": "",
+                        "size": "",
+                        "options": []
+                    }
+                ],
                 "main_menu": [
                     {
                         "uri": "entity:node/328",
@@ -684,6 +757,79 @@ export const columnsEN = {
                     }
                 ],
                 "footer_column_4": "<div class=\"col-sm-6 col-lg-3\">\r\n<div class=\"rdl-logo rdl-logo-inverted\">\r\n    <span class=\"sr-only\">Contact information</span>\r\n</div>\r\n\r\n<div><p><a href=\"/en/ask-library\">Ask the library</a></p></div>\r\n<div>\r\n<p><a href=\"https://www.kb.dk/en/about-us/contact>kb@kb.dk</a></p>\r\n</div>\r\n<div aria-label=\"phonenumber\">\r\n<p>Tel: <a href=\"tel:+4533474747\">(+45) 3347 4747</a></p>\r\n</div>\r\n<div><p><a href=\"/en/about-us/press\">Press contact</a></p></div>\r\n<div aria-label=\"EAN number\">\r\n<p>EAN: 5798000795297</p>\r\n</div>\r\n<div class=\"some-icons\">\r\n<a href=\"https://www.facebook.com/DetKglBibliotek/\"><i class=\"rdl-icons\">rdl_facebook</i><span class=\"sr-only\">Følg os på facebook</span></a>\r\n<a href=\"https://www.instagram.com/detkglbibliotek/\"><i class=\"rdl-icons\">rdl_instagram</i><span class=\"sr-only\">Følg os på Instagram</span></a>\r\n<a href=\"https://www.linkedin.com/company/det-kgl-bibliotek/\"><i class=\"rdl-icons\">rdl_linkedin</i><span class=\"sr-only\">Følg os på LinkedIn</span></a>\r\n<a href=\"https://twitter.com/DetKglBibliotek\"><i class=\"rdl-icons\">rdl_twitter</i><span class=\"sr-only\">Follow us on Twitter</span></a>\r\n</div>\r\n</div>",
+                "footer_column_5": [
+                    {
+                        "uri": "route:\u003Cnolink\u003E",
+                        "full_url": "",
+                        "title": "logo",
+                        "options": []
+                    },
+                    {
+                        "uri": "entity:node/242",
+                        "full_url": "https://kbdk-testing.kb.dk/en/ask-library",
+                        "title": "Ask the library",
+                        "options": []
+                    },
+                    {
+                        "uri": "mailto:kb@kb.dk",
+                        "full_url": "mailto:kb@kb.dk",
+                        "title": "kb@kb.dk",
+                        "options": []
+                    },
+                    {
+                        "uri": "route:\u003Cnolink\u003E",
+                        "full_url": "",
+                        "title": "(+45) 3347 4747",
+                        "options": []
+                    },
+                    {
+                        "uri": "entity:node/148",
+                        "full_url": "https://kbdk-testing.kb.dk/en/about-us/press",
+                        "title": "Press contact",
+                        "options": []
+                    },
+                    {
+                        "uri": "route:\u003Cnolink\u003E",
+                        "full_url": "",
+                        "title": "EAN: 5798000795297",
+                        "options": []
+                    }
+                ],
+                "footer_column_6": [
+                    {
+                        "uri": "https://www.facebook.com/DetKglBibliotek/",
+                        "title": "Follow us on Facebook",
+                        "text": "Follow us on Facebook",
+                        "new_window": 1,
+                        "relation": "",
+                        "icon": "facebook",
+                        "variant": "",
+                        "size": "",
+                        "options": []
+                    },
+                    {
+                        "uri": "https://www.instagram.com/detkglbibliotek/",
+                        "title": "Follow us on Instagram",
+                        "text": "Follow us on Instagram",
+                        "new_window": 1,
+                        "relation": "",
+                        "icon": "instagram",
+                        "variant": "",
+                        "size": "",
+                        "options": []
+                    },
+                    {
+                        "uri": "https://www.linkedin.com/company/det-kgl-bibliotek/",
+                        "title": "Follow us in LinkedIN",
+                        "text": "Follow us in LinkedIN",
+                        "new_window": 1,
+                        "relation": "",
+                        "icon": "linkedin",
+                        "variant": "",
+                        "size": "",
+                        "options": []
+                    }
+                ],
                 "main_menu": [
                     {
                         "uri": "entity:node/328",
