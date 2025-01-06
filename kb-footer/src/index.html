@@ -11,14 +11,24 @@
  <option value="en">English</option>
 </select>
 
+<label for="bgcolor">Backgroud color:</label>
+<select id="bgcolor">
+ <option value="" selected>Dark blue</option>
+ <option value="skyblue">Sky blue</option>
+</select>
 <script>
+
  document.getElementById('language').addEventListener('change', function() {
   let footer = document.querySelector("kb-footer");
   footer.language = this.value;
  });
+ document.getElementById('bgcolor').addEventListener('change', function() {
+  let footer = document.querySelector("kb-footer");
+  footer.bgcolor = this.value;
+ });
 </script>
 <script src="//cookie-script.com/s/2d58d2b3a13b0eb49ff32a57dc77c4ab.js"></script>
-<kb-footer language="da" jsonUuId="a93161a6-6461-4d3c-a282-3383e6d9edb2">
+<kb-footer language="da" jsonUuId="a93161a6-6461-4d3c-a282-3383e6d9edb2" bgcolor="">
  <ul id="appFooterColumnDA" >
   <style>kb-footer > ul {display: none;}</style>
   <li><a href="#">Om KBs Digitale samlinger</a></li>
