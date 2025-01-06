@@ -4,10 +4,11 @@ In kb design manual, every application has to use exactly the same footer at in 
 
 ### Properties
 
-| Property | Attribute |                       Description                        |     Type      |  Default  |
-|:--------:|:---------:|:--------------------------------------------------------:|:-------------:|:---------:|
-| language | language  |                The language of the page.                 |  "da" / "en"  |   "da"    | 
-| jsonUuId |    jsonUuId     | Universally Unique IDentifier (uuid) of drupal site node |    string     |    ""     |
+| Property | Attribute |                                                             Description                                                              |    Type     |  Default  |
+|:--------:|:---------:|:------------------------------------------------------------------------------------------------------------------------------------:|:-----------:|:---------:|
+| language | language  |                   The language of the page.                               | "da" / "en" |   "da"    |
+| jsonUuId |    jsonUuId     |                                       Universally Unique IDentifier (uuid) of drupal site node                                       |   string    |    ""     |
+| bgColor  |    bgColor     |If the footer background color is to be sky blue, set the value to "skyblue" otherwise the footer will be the dark blue default color.|  "skyblue"/ ""  |    ""     |
 
 ### Additional considerations
 KB design allows the first column to be overwritten by the application but the other three must be the same as in kb.dk.
